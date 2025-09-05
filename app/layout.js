@@ -37,7 +37,7 @@ export default function RootLayout({ children }) {
               <Link href="/contact" className="hover:underline">
                 
                 <MdOutlinePhoneInTalk size={24} />
-              </Link>
+              </Link>         
             </div>
           </div>
         </nav>

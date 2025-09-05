@@ -1,8 +1,6 @@
-// app/about/page.js
-
 export default function AboutPage() {
   return (
-    <main className="max-w-4xl mx-auto px-4 py-12 text-white">
+    <main className="max-w-4xl mx-auto px-4 py-12 text-white transition-opacity duration-3000 opacity-0 animate-fadeIn">
       <h1 className="text-4xl font-bold mb-6 text-teal-300">About Us</h1>
       
       <p className="text-gray-200 mb-4 leading-relaxed">
