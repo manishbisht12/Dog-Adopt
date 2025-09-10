@@ -22,7 +22,7 @@ export default function FavoritesPage() {
               width={400}
               height={300}
             />
-            <h2 className="text-xl font-semibold">{dog.name}</h2>
+            <h2 className="text-xl text-cyan-500 font-semibold">{dog.name}</h2>
             <p className="text-gray-600">{dog.breed}</p>
             <Link
               href={`/dogs/${dog.id}`}
