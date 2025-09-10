@@ -6,8 +6,18 @@ import Link from "next/link";
 export default function FavoritesPage() {
   const { favorites } = useFavorites();
 
-  if (favorites.length === 0)
-    return <p className="p-8 text-center">No favorite dogs yet.</p>;
+    if (favorites.length === 0)
+    return (
+      <div className="p-8 text-center">
+        <p className="text-xl mb-4">No favorite dogs yet.</p>
+        <Link
+          href="/dogs"
+          className="inline-block px-5 py-2 bg-teal-600 text-white rounded hover:bg-teal-700 transition"
+        >
+          Browse Dogs →
+        </Link>
+      </div>
+    );
 
   return (
     <main className="max-w-4xl mx-auto p-8">
