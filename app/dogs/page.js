@@ -32,7 +32,7 @@ export default function DogsPage() {
                 <button
                   onClick={() => toggleFavorite(dog)}
                   aria-label="Add to wishlist"
-                  className={`absolute top-3 right-3 text-3xl transition-colors ${
+                  className={`absolute top-3 right-3 text-3xl transition-colors cursor-pointer ${
                     isFavorite ? "text-red-500" : "text-gray-300 hover:text-red-500"
                   }`}
                 >
