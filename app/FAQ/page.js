@@ -1,69 +1,90 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function FAQChat() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState([
-    { from: "bot", text: "Hi! Welcome to Dog Adoption Center chat. Do you want to adopt a dog? (yes/no)" },
+    {
+      from: "bot",
+      text: "Hi! Welcome to Dog Adoption Center chat. Do you want to adopt a dog? (yes/no)",
+    },
   ]);
   const [input, setInput] = useState("");
-  const [step, setStep] = useState(0); // Track conversation step
+  const [step, setStep] = useState(0);
   const messagesEndRef = useRef(null);
+  const router = useRouter();
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  const addBotMessage = (text) => {
+    setMessages((msgs) => [...msgs, { from: "bot", text }]);
+  };
+
   const handleSend = () => {
     if (!input.trim()) return;
 
-    const userMessage = input.trim().toLowerCase();
-    setMessages((msgs) => [...msgs, { from: "user", text: input.trim() }]);
+    const userMessage = input.trim();
+    const userLower = userMessage.toLowerCase();
+    setMessages((msgs) => [...msgs, { from: "user", text: userMessage }]);
     setInput("");
 
-    // Handle conversation flow based on step
     switch (step) {
-      case 0: // Ask about adoption
-        if (userMessage.includes("yes")) {
+      case 0:
+        if (userLower.includes("yes")) {
           addBotMessage("Great! Which breed of dog are you interested in?");
           setStep(1);
-        } else if (userMessage.includes("no")) {
-          addBotMessage("No worries! Would you like to donate to support our dog adoption center? (yes/no)");
+        } else if (userLower.includes("no")) {
+          addBotMessage(
+            "No worries! Would you like to donate to support our dog adoption center? (yes/no)"
+          );
           setStep(2);
         } else {
           addBotMessage("Please reply with 'yes' or 'no'. Do you want to adopt a dog?");
         }
         break;
 
-      case 1: // Ask about breed
-        addBotMessage(`Thanks for your interest in the ${input.trim()} breed! Would you also like to donate to support our center? (yes/no)`);
+      case 1:
+        addBotMessage(
+          `Thanks for your interest in the ${userMessage} breed! Would you also like to donate to support our center? (yes/no)`
+        );
         setStep(2);
         break;
 
-      case 2: // Ask about donation
-        if (userMessage.includes("yes")) {
-          addBotMessage("Thank you so much for your generosity! You can donate through our website anytime.");
-        } else if (userMessage.includes("no")) {
-          addBotMessage("No problem! Thank you for chatting with us.");
+      case 2:
+        if (userLower.includes("yes")) {
+          addBotMessage("Thank you for your generosity! You can donate through our website.");
+        } else if (userLower.includes("no")) {
+          addBotMessage("No problem! Thanks for considering it.");
         } else {
           addBotMessage("Please reply with 'yes' or 'no'. Would you like to donate?");
-          return; // don't increment step
+          return;
         }
-        setStep(3);
+        setTimeout(() => {
+          addBotMessage("Would you like to continue with a live chat? (yes/no)");
+          setStep(3);
+        }, 1000);
         break;
 
-      case 3: // End conversation
-        addBotMessage("If you have more questions, feel free to ask or browse our dogs anytime!");
+      case 3:
+        if (userLower.includes("yes")) {
+          addBotMessage("Redirecting you to live chat...");
+          setTimeout(() => {
+            router.push("/chat");
+          }, 1000);
+        } else if (userLower.includes("no")) {
+          addBotMessage("Thanks for chatting with us! 🐾");
+        } else {
+          addBotMessage("Please reply with 'yes' or 'no'. Continue to live chat?");
+        }
         break;
 
       default:
-        addBotMessage("I'm here to help! Feel free to ask me anything about dog adoption.");
+        addBotMessage("Feel free to ask anything else about dog adoption!");
     }
-  };
-
-  const addBotMessage = (text) => {
-    setMessages((msgs) => [...msgs, { from: "bot", text }]);
   };
 
   const handleKeyDown = (e) => {
@@ -105,6 +126,7 @@ export default function FAQChat() {
           <div className="bg-teal-600 text-white px-4 py-3 rounded-t-lg font-semibold">
             Dog Adoption Chat
           </div>
+
           <div className="flex-1 p-3 overflow-y-auto space-y-3">
             {messages.map((msg, i) => (
               <div
@@ -112,7 +134,7 @@ export default function FAQChat() {
                 className={`flex ${msg.from === "user" ? "justify-end" : "justify-start"}`}
               >
                 <div
-                  className={`max-w-[70%] px-3 py-2 rounded-lg ${
+                  className={`max-w-[70%] px-3 py-2 rounded-lg text-sm ${
                     msg.from === "user"
                       ? "bg-teal-600 text-white"
                       : "bg-gray-200 text-gray-800"
@@ -124,6 +146,7 @@ export default function FAQChat() {
             ))}
             <div ref={messagesEndRef} />
           </div>
+
           <div className="p-3 border-t flex gap-2">
             <textarea
               rows={1}
