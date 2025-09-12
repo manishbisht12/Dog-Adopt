@@ -6,6 +6,7 @@ import { LuNotebookPen } from "react-icons/lu";
 import { MdOutlinePhoneInTalk } from "react-icons/md";
 import { FavoritesProvider } from "./context/FavoritesContext";
 import NavbarFavorites from "./components/NavbarFavorites";
+import Image from "next/image";
 
 export const metadata = {
   title: "Dog Adoption Center",
@@ -19,24 +20,24 @@ export default function RootLayout({ children }) {
         <FavoritesProvider>
         <nav className="bg-teal-600 text-white px-8 py-4 shadow fixed w-full top-0 z-50">
           <div className="max-w-6xl mx-auto flex justify-between items-center">
-            <Link href="/" className="text-2xl font-bold">
-              DogAdopt
-            </Link>
+            <Link href="/" className="flex items-center">
+              <Image src="/images/D.png" alt="Dog Logo" width={40} height={40} />
+              </Link>
             
             <div className="space-x-20 flex items-center ">
-              <Link href="/" className="hover:underline">
+              <Link href="/" className="hover:text-black">
                 
                 <IoHomeOutline size={24} />
               </Link>
-              <Link href="/dogs" className="hover:underline">
+              <Link href="/dogs" className="hover:text-black">
                
                 <PiDogBold size={24} />
               </Link>
-              <Link href="/about" className="hover:underline">
+              <Link href="/about" className="hover:text-black">
                 
                 <LuNotebookPen size={24} />
               </Link>
-              <Link href="/contact" className="hover:underline">
+              <Link href="/contact" className="hover:text-black">
                 
                 <MdOutlinePhoneInTalk size={24} />
               </Link>   
