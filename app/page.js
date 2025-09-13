@@ -14,8 +14,8 @@ export default function HomePage() {
         {/* Dark overlay */}
         <div className="absolute inset-0 bg-black opacity-50"></div>
 
-        {/* Main Content */}
-        <div className="relative max-w-4xl text-center text-white z-10">
+        {/* Main Content with animation */}
+        <div className="relative max-w-4xl text-center text-white z-10 animate-fade-in-down">
           <h1 className="text-4xl font-bold mb-4 drop-shadow-lg">
             WELCOME TO DOG ADOPTION CENTER
           </h1>
