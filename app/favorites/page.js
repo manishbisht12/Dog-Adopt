@@ -4,9 +4,9 @@ import { useFavorites } from "../context/FavoritesContext";
 import Link from "next/link";
 
 export default function FavoritesPage() {
-  const { favorites } = useFavorites();
+  const { favorites, toggleFavorite } = useFavorites();
 
-    if (favorites.length === 0)
+  if (favorites.length === 0)
     return (
       <div className="p-8 text-center">
         <p className="text-xl mb-4">No favorite dogs yet.</p>
@@ -24,7 +24,17 @@ export default function FavoritesPage() {
       <h1 className="text-3xl font-bold mb-6">Your Favorite Dogs</h1>
       <div className="grid gap-6 grid-cols-1 sm:grid-cols-2">
         {favorites.map((dog) => (
-          <div key={dog.id} className="bg-white rounded shadow p-4">
+          <div key={dog.id} className="bg-white rounded shadow p-4 relative">
+            {/* Wishlist Button */}
+            <button
+              onClick={() => toggleFavorite(dog)}
+              aria-label="Remove from wishlist"
+              className="absolute top-3 right-3 text-3xl cursor-pointer text-red-500 hover:text-red-700 transition"
+            >
+              ❤️
+            </button>
+
+            {/* Dog Image */}
             <img
               src={dog.image}
               alt={dog.name}
@@ -32,6 +42,8 @@ export default function FavoritesPage() {
               width={400}
               height={300}
             />
+
+            {/* Dog Info */}
             <h2 className="text-xl text-cyan-500 font-semibold">{dog.name}</h2>
             <p className="text-gray-600">{dog.breed}</p>
             <Link
