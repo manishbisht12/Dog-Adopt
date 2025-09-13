@@ -22,7 +22,7 @@ export default function FavoritesPage() {
   return (
     <main className="max-w-4xl mx-auto p-8">
       <h1 className="text-3xl font-bold mb-6">Your Favorite Dogs</h1>
-      <div className="grid gap-6 grid-cols-1 sm:grid-cols-2">
+      <div className="grid gap-10 grid-cols-1 sm:grid-cols-2">
         {favorites.map((dog) => (
           <div key={dog.id} className="bg-white rounded shadow p-4 relative">
             {/* Wishlist Button */}

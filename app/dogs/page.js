@@ -34,7 +34,7 @@ export default function DogsPage() {
         <select
           value={filterAge}
           onChange={(e) => setFilterAge(e.target.value)}
-          className="border text-green-300 border-gray-300 rounded px-3 py-2"
+          className="border text-green-300 border-gray-300 rounded px-3 py-2 bg-gray-800"
         >
           <option value="">All Ages</option>
           {[...Array(15)].map((_, i) => {
@@ -49,14 +49,14 @@ export default function DogsPage() {
       </div>
 
       {/* Dogs Grid */}
-      <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+      <div className="grid gap-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
         {filteredDogs.map((dog) => {
           const isFavorite = favorites.some((d) => d.id === dog.id);
 
           return (
             <div
               key={dog.id}
-              className="bg-white rounded shadow p-4 transition-transform"
+              className="bg-gray-800 rounded shadow p-4 transition-transform"
             >
               <div className="relative overflow-hidden rounded mb-4">
                 <img
@@ -77,7 +77,7 @@ export default function DogsPage() {
                 </button>
               </div>
 
-              <h2 className="text-xl text-black font-semibold">{dog.name}</h2>
+              <h2 className="text-xl text-white font-semibold">{dog.name}</h2>
               <p className="text-gray-600">{dog.breed}</p>
               <p className="text-sm text-gray-500">Age: {dog.age} years</p>
 
@@ -99,4 +99,3 @@ export default function DogsPage() {
     </main>
   );
 }
-21
