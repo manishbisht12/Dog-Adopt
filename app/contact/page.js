@@ -6,11 +6,12 @@ export default function ContactPage() {
       {/* Chat Button in Top-Right */}
       <div className="absolute top-6 right-6">
         <Link
-          href="/chat"
-          className="bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-700 transition"
-        >
-          💬 Chat with Us Live
-        </Link>
+         href="/chat"
+         className="bg-gradient-to-r from-teal-500 to-cyan-600 text-white px-4 py-2 rounded hover:from-teal-600 hover:to-cyan-700 transition"
+       >
+         💬 Chat with Us Live
+       </Link>
+
       </div>
 
       <div className="max-w-4xl mx-auto pt-16">

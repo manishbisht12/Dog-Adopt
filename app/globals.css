@@ -1,21 +1,41 @@
 @import "tailwindcss";
-
-
-
-@layer utilities {
-  @keyframes fade-in-down {
-    0% {
-      opacity: 0;
-      transform: translateY(-50px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
+@keyframes slow-fly {
+  0% {
+    transform: translateX(-100px);
+    opacity: 1;
   }
+  100% {
+    transform: translateX(130vw);
+    opacity: 0;
+  }
+}
 
-  .animate-fade-in-down {
-    animation: fade-in-down 1.2s ease-out both;
+.animate-slow-fly {
+  animation: slow-fly 3.1s ease-in-out forwards;
+}
+
+.fog-trail {
+  animation: fog-grow 3.5s ease-in-out forwards;
+}
+
+/* Optional smooth fade-in + slide-up for words */
+span {
+  display: inline-block;
+  will-change: opacity, transform;
+}
+
+
+@keyframes fog-grow {
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  100% {
+    width: 250px;
+    opacity: 0.1;
   }
 }
 
